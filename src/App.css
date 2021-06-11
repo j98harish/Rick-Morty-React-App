@@ -14,14 +14,15 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  /* background-color: #282c34; */
+  min-height: 12vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #568465;
+  cursor: pointer;
 }
 
 .App-link {
@@ -35,4 +36,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+ui {
+  color: #61dafb;
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 2px black;
+}
+
+li {
+  display: inline-block;
+  padding-left: 4%;
+  /* background-color: red;  */
+  color: #456e63;
+  padding-top: 11vh;
+  padding-bottom: 11vh;
+  align-content: left;
 }
