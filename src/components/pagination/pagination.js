@@ -10,18 +10,17 @@ import './pagination.css'
 //   };
 
 
-export const Pagination = (props)=> {
-    console.log(props);
+export const Pagination = ({totalNumberOfPages, handlePageClick})=> { 
     return(
         <div>
             <ReactPaginate
-                pageCount= {props.totalNumberOfPages}
+                pageCount= {totalNumberOfPages}
                 pageRangeDisplayed = {2}
                 marginPagesDisplayed = {5}
                 previousLabel = 'Privious'
                 nextLabel = 'Next'
                 breakLabel = '...'
-                onPageChange = {props.handlePageClick}
+                onPageChange = {handlePageClick}
                 containerClassName={'pagination'}
                 breakClassName={'break-me'}
                 activeClassName={'active'}
