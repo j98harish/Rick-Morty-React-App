@@ -17,7 +17,7 @@ export const Pagination = ({totalNumberOfPages, handlePageClick})=> {
                 pageCount= {totalNumberOfPages}
                 pageRangeDisplayed = {2}
                 marginPagesDisplayed = {5}
-                previousLabel = 'Privious'
+                previousLabel = 'Previous'
                 nextLabel = 'Next'
                 breakLabel = '...'
                 onPageChange = {handlePageClick}

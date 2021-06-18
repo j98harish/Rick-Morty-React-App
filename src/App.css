@@ -43,6 +43,7 @@ ui {
   padding-left: 15px;
   padding-right: 15px;
   border: 2px black;
+  cursor: pointer;
 }
 
 li {
@@ -53,4 +54,8 @@ li {
   padding-top: 11vh;
   padding-bottom: 11vh;
   align-content: left;
+}
+
+a {
+  text-decoration: none;
 }
