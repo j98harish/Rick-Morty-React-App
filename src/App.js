@@ -13,7 +13,7 @@ class App extends Component{
       characters :[],
       nextPage:2,
       pageCount:null,
-      hasMore : true,
+      contentLeft : true,
     };
   }
 
@@ -38,37 +38,42 @@ class App extends Component{
     this.fetchData(activePage);
   };
 
-  //
   //Changes active page and provide new data
-  onLoadMore = (e) => {
-    const loadNextPage = this.state.nextPage
-    this.setState({ nextPage: this.state.nextPage + 1});
-    this.fetchData(loadNextPage);
-  };
+  onLoadMore = () => {
+    if(this.nextPage > this.state.pageCount ){
+      this.setState({contentLeft: false});
+      return;
+    }
+    else{
+      this.fetchData(this.state.nextPage);
+      // const loadNextPage = this.state.nextPage;
+      this.setState({ nextPage: this.state.nextPage + 1});
+    }
+  }
+  
 
-  // loadFunc(nextPageNumber) {
-  //   if(this.state.pageCount === nextPageNumber){
-  //     this.setState({pageNumber: this.state.pageNumber + 1})
-  //     this.fetchData(nextPageNumber) 
-  //    }
-  //   this.fetchData(nextPageNumber);
-  // }
+  loadFunc(nextPageNumber) {
+    if(this.state.pageCount === nextPageNumber){
+      this.setState({pageNumber: this.state.pageNumber + 1})
+      this.fetchData(nextPageNumber) 
+     }
+    this.fetchData(nextPageNumber);
+  }
 
   render(){
     return(
       <div className="App">
         <h1 className= "App-header" > Rick &amp; Morty React App</h1>
-        <CardList characters= {this.state.characters}/>
-        <button type="button" class="btn btn-primary btn-lg"
-         onClick = {this.onLoadMore}>Load More</button> 
+        {/* <CardList characters= {this.state.characters}/> */}
+        {/* <button type="button" class="btn btn-primary btn-lg"
+         onClick = {this.onLoadMore}>Load More</button>  */}
 
         {/* <Pagination
           totalNumberOfPages = {this.state.pageCount}
           currentPageNumber = {this.state.pageNumber}
           handlePageClick = {this.handlePageClick}
           />  */}
-      {/* {<InfiniteScroll
-        element = 'div'
+      {/* <InfiniteScroll
         pageStart={1}
         loadMore= {this.loadFunc(this.state.pageNumber)}
         hasMore={this.state.hasMore}
@@ -77,8 +82,20 @@ class App extends Component{
         threshold = {3}
       >
       <CardList characters= {this.state.characters}/>
-      </InfiniteScroll> } */}
-      </div>
+      </InfiniteScroll>  */}
+
+       <InfiniteScroll
+      initialLoad = {false}
+      loadMore = {this.onLoadMore}
+      hasMore = {this.state.contentLeft}
+      loader={<div className="loader" key={0}>Loading ...</div>}
+      threshold = {350}
+      useWindow={true}
+      > 
+        <CardList characters= {this.state.characters}/>
+        {/* <h3>{this.state.contentLeft}  -- {this.state.pageNumber}</h3> */}
+      </InfiniteScroll> 
+      </div> 
     )
   }
 }
