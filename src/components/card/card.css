@@ -12,6 +12,10 @@
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
 }
+.card-container > a {
+  text-decoration: none;
+  color: #314e47;
+}
 
 .card-container:hover {
   transform: scale(1.05);

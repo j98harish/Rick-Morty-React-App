@@ -1,9 +1,12 @@
 import './App.css';
 import React, { Component } from 'react';
-import InfiniteScroll from "react-infinite-scroller";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
-import {CardList} from './components/card-list/card-list';
-import {Pagination} from './components/pagination/pagination';
+import {Header} from './components/header/header';
+import {AllCards} from './components/all-cards/all-cards';
+import Profile from './components/profile/profile';
+import {Footer} from './components/footer/footer';
+
 
 class App extends Component{
   constructor(){
@@ -31,13 +34,6 @@ class App extends Component{
   )
 }
 
-//Changes active page and provide new data
-  handlePageClick = (e) => {
-    const activePage = e.selected + 1;
-    this.setState({ pageNumber: activePage});
-    this.fetchData(activePage);
-  };
-
   //Changes active page and provide new data
   onLoadMore = () => {
     if(this.nextPage > this.state.pageCount ){
@@ -46,7 +42,6 @@ class App extends Component{
     }
     else{
       this.fetchData(this.state.nextPage);
-      // const loadNextPage = this.state.nextPage;
       this.setState({ nextPage: this.state.nextPage + 1});
     }
   }
@@ -63,38 +58,22 @@ class App extends Component{
   render(){
     return(
       <div className="App">
-        <h1 className= "App-header" > Rick &amp; Morty React App</h1>
-        {/* <CardList characters= {this.state.characters}/> */}
-        {/* <button type="button" class="btn btn-primary btn-lg"
-         onClick = {this.onLoadMore}>Load More</button>  */}
-
-        {/* <Pagination
-          totalNumberOfPages = {this.state.pageCount}
-          currentPageNumber = {this.state.pageNumber}
-          handlePageClick = {this.handlePageClick}
-          />  */}
-      {/* <InfiniteScroll
-        pageStart={1}
-        loadMore= {this.loadFunc(this.state.pageNumber)}
-        hasMore={this.state.hasMore}
-        loader={<div className="loader" key={1}>Loading ...</div>}
-        useWindow={false}
-        threshold = {3}
-      >
-      <CardList characters= {this.state.characters}/>
-      </InfiniteScroll>  */}
-
-       <InfiniteScroll
-      initialLoad = {false}
-      loadMore = {this.onLoadMore}
-      hasMore = {this.state.contentLeft}
-      loader={<div className="loader" key={0}>Loading ...</div>}
-      threshold = {350}
-      useWindow={true}
-      > 
-        <CardList characters= {this.state.characters}/>
-        {/* <h3>{this.state.contentLeft}  -- {this.state.pageNumber}</h3> */}
-      </InfiniteScroll> 
+        <Header />
+        <Router>
+        <Switch>
+          <Route exact path="/" >
+            <AllCards
+              characters = {this.state.characters}
+              onLoadMore = {this.onLoadMore}
+              contentLeft = {this.state.contentLeft}
+            />
+          </Route>
+          <Route path="/profile/:id" >
+            <Profile />
+          </Route>
+        </Switch>
+        </Router>
+        <Footer />
       </div> 
     )
   }
